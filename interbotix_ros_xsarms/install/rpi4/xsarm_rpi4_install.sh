@@ -240,20 +240,20 @@ function install_ros1() {
 
 function install_ros2() {
   # Install ROS 2
-  if [ "$(dpkg-query -W -f='${Status}' ros-"$ROS_DISTRO_TO_INSTALL"-desktop 2>/dev/null | grep -c "ok installed")" -eq 0 ]; then
-    echo -e "${GRN}Installing ROS 2 $ROS_DISTRO_TO_INSTALL desktop...${OFF}"
-    sudo apt-get install -yq      \
-      software-properties-common  \
-      gnupg
-    sudo add-apt-repository -y universe
-    sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(source /etc/os-release && echo "$UBUNTU_CODENAME") main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
-    sudo apt-get update
-    sudo apt-get install -yq ros-"$ROS_DISTRO_TO_INSTALL"-desktop
-    echo "source /opt/ros/$ROS_DISTRO_TO_INSTALL/setup.bash" >> ~/.bashrc
-  else
-    echo "ros-$ROS_DISTRO_TO_INSTALL-desktop is already installed!"
-  fi
+  # if [ "$(dpkg-query -W -f='${Status}' ros-"$ROS_DISTRO_TO_INSTALL"-desktop 2>/dev/null | grep -c "ok installed")" -eq 0 ]; then
+  #   echo -e "${GRN}Installing ROS 2 $ROS_DISTRO_TO_INSTALL desktop...${OFF}"
+  #   sudo apt-get install -yq      \
+  #     software-properties-common  \
+  #     gnupg
+  #   sudo add-apt-repository -y universe
+  #   sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+  #   echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(source /etc/os-release && echo "$UBUNTU_CODENAME") main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+  #   sudo apt-get update
+  #   sudo apt-get install -yq ros-"$ROS_DISTRO_TO_INSTALL"-desktop
+  #   echo "source /opt/ros/$ROS_DISTRO_TO_INSTALL/setup.bash" >> ~/.bashrc
+  # else
+  #   echo "ros-$ROS_DISTRO_TO_INSTALL-desktop is already installed!"
+  # fi
   source /opt/ros/"$ROS_DISTRO_TO_INSTALL"/setup.bash
 
   # Install rosdep and other necessary tools
